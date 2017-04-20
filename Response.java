@@ -63,4 +63,14 @@ public class Response {
     public boolean liked() {
         return liked;
     }
+    
+    /**
+     * sets whether or not a person likes a song
+     * 
+     * @param liked
+     *            whether or not person likes song
+     */
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
 }
