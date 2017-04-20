@@ -113,26 +113,24 @@ public class SongList {
     public SongIterator iterator() {
         return new SongIterator();
     }
-
-
+    
     /**
      * sorts the song list by artist using selection sort
      * 
      */
     public void sortByArtist() {
-        Node headPrime = head; //The new head of the sorted list
-        Node tailPrime; //The new tail of the sorted list
-        int leftToSort = length; //The number of nodes unsorted - starts out as all of the nodes
-        SongIterator iterator = iterator();
-        while(iterator.hasNext()) {
-            Node current = iterator.next();
-            if(head.getData().compareArtist(current.getData().getArtist()) < 0) {
-                headPrime = current
-            }
-        }
-        for(int i = 1; i < leftToSort; i--) {
-            
-        }
+       for(Node start = head; start != tail; start = start.getNext()) {
+           Node largest = start;
+           for(Node curr = start; curr != null; curr = curr.getNext()) {
+               if(largest.getData().compareArtist(curr.getData()) < 0) {
+                   largest = curr;
+               }
+           }
+           Song tmp = start.getData();
+           start.setData(largest.getData());
+           largest.setData(tmp);
+           
+       }
     }
 
 
@@ -179,11 +177,18 @@ public class SongList {
         private Song getData() {
             return data;
         }
+        private void setData(Song d) {
+            data = d;
+        }
 
 
         private void remove() {
-            prev.setNext(next);
+            if(prev != null) {
+                prev.setNext(next);
+            }
+            if(next != null) {
             next.setPrevious(prev);
+            }
         }
 
     }
