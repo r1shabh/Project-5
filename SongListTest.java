@@ -64,5 +64,13 @@ public class SongListTest extends student.TestCase{
         
         assertTrue(Arrays.equals(song, sl1Array));
     }
+    
+    /**
+     * tests the sort by artist
+     */
+    public void testSortByArtist() {
+        sl1.sortByArtist();
+        assertEquals(sl2, sl1);
+    }
 
 }
