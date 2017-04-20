@@ -1,9 +1,8 @@
-/**
- * 
- */
-package MusicPreferenceVisualization;
+package prj5;
 
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import list.ListInterface;
 
 /**
  * @author Jonathan Alexander (jma)
@@ -20,8 +19,10 @@ public class SongList {
 
 
     public SongList() {
-        head = null; // By default head is null as there are no nodes
-        tail = null; // By default tail is null as there are no nodes
+        head = new Node();
+        tail = new Node();
+        //head = null; // By default head is null as there are no nodes
+        //tail = null; // By default tail is null as there are no nodes
         length = 0; // By default the length is 0 as there are no nodes
     }
 
@@ -33,10 +34,21 @@ public class SongList {
      *            the entry to be added to the list
      */
     public void add(Song newEntry) {
-        Node newLast = new Node(tail, null, newEntry);
-        tail.setNext(newLast);
-        tail = newLast;
-        length++;
+        if (length == 0) {
+            Node newNode = new Node(head, tail, newEntry);
+            head.setNext(newNode);
+            tail.setPrevious(newNode);
+            length++;
+        }
+        else {
+            Node end = new Node(tail.getPrevious(), tail, newEntry);
+            tail.getPrevious().setNext(end);
+            tail.setPrevious(end);
+            //Node newLast = new Node(tail, null, newEntry);
+            //tail.setNext(newLast);
+            //tail = newLast;
+            length++;
+        }
     }
 
 
@@ -46,8 +58,10 @@ public class SongList {
      * 
      */
     public void clear() {
-        head = null; // By default head is null as there are no nodes
-        tail = null; // By default tail is null as there are no nodes
+        head.setNext(null);
+        tail.setPrevious(null);
+        //head = null; // By default head is null as there are no nodes
+        //tail = null; // By default tail is null as there are no nodes
         length = 0; // By default the length is 0 as there are no nodes
     }
 
@@ -60,7 +74,7 @@ public class SongList {
      * @return the element at the given position
      */
     public Song getEntry(int givenPosition) {
-        Node current = head;
+        Node current = head.getNext();
         for (int i = 1; i < givenPosition; i++) {
             current = current.getNext();
         }
@@ -95,9 +109,9 @@ public class SongList {
      */
     public Object[] toArray() {
         Object[] toReturn = new Object[length];
-        Node current = head;
-        for (int i = 0; i < length - 1; i++) {
-            toReturn[i] = current;
+        Node current = head.getNext();
+        for (int i = 0; i <= length - 1; i++) {
+            toReturn[i] = current.getData();
             current = current.getNext();
         }
         return toReturn;
@@ -112,28 +126,26 @@ public class SongList {
     public SongIterator iterator() {
         return new SongIterator();
     }
-
-
+    
     /**
      * sorts the song list by artist using selection sort
      * 
      */
     public void sortByArtist() {
-        for (Node start = head; start != tail; start = start.getNext()) {
-            Node largest = start;
-            for (Node curr = start; curr != null; curr = curr.getNext()) {
-                if (largest.getData().compareArtist(curr.getData()) < 0) {
-                    largest = curr;
-                }
-            }
-            Song tmp = start.getData();
-            start.setData(largest.getData());
-            largest.setData(tmp);
-
-        }
+       for(Node start = head; start != tail; start = start.getNext()) {
+           Node largest = start;
+           for(Node curr = start; curr != null; curr = curr.getNext()) {
+               if(largest.getData().compareArtist(curr.getData()) < 0) {
+                   largest = curr;
+               }
+           }
+           Song tmp = start.getData();
+           start.setData(largest.getData());
+           largest.setData(tmp);
+           
+       }
     }
-
-
+    
     /**
      * sorts the song list by Genre using selection sort
      * 
@@ -205,8 +217,11 @@ public class SongList {
         Song data;
         Node next;
         Node prev;
-
-
+        
+        private Node() {
+            this(null, null, null);
+        }
+        
         private Node(Node before, Node after, Song song) {
             this.data = song;
             this.next = after;
@@ -237,20 +252,15 @@ public class SongList {
         private Song getData() {
             return data;
         }
-
-
+        
         private void setData(Song d) {
             data = d;
         }
 
 
         private void remove() {
-            if (prev != null) {
-                prev.setNext(next);
-            }
-            if (next != null) {
-                next.setPrevious(prev);
-            }
+            prev.setNext(next);
+            next.setPrevious(prev);
         }
 
     }
@@ -291,6 +301,17 @@ public class SongList {
             Node toReturn = next;
             next = next.getNext();
             return toReturn;
+        }
+
+
+        /**
+         * gets the node after the iterator without moving it
+         * 
+         * @return the node after the iterator which will be returned on the
+         *         next next() call;
+         */
+        private Node getNext() {
+            return next;
         }
 
     }
