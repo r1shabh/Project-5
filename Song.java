@@ -1,7 +1,4 @@
-/**
- * 
- */
-package MusicPreferenceVisualization;
+package prj5;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -284,6 +281,7 @@ public class Song {
         sBuilder.append(title);
         sBuilder.append(" by ");
         sBuilder.append(artist);
+        sBuilder.append(" ");
         sBuilder.append(year);
         sBuilder.append(" ");
         sBuilder.append(genre);
