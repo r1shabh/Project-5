@@ -37,6 +37,7 @@ public class SongList {
     public void add(Song newEntry) {
         Node newLast = new Node(tail, null, newEntry);
         tail.setNext(newLast);
+        tail = newLast;
         length++;
     }
 
