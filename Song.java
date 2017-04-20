@@ -86,7 +86,18 @@ public class Song {
     public void addResponse(Response r) {
         responses.add(r);
     }
-
+    
+    /**
+     * edits the response of whether someone likes a song
+     * 
+     * @param index
+     *            index of response to be edited
+     * @param liked
+     *            the edit made to response
+     */
+    public void editResponse(int index, boolean liked) {
+        responses.get(index).setLiked(liked);
+    }
 
     /**
      * Tells how many responses there are for this song
