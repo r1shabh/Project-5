@@ -3,9 +3,7 @@
  */
 package MusicPreferenceVisualization;
 
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
-import list.ListInterface;
 
 /**
  * @author Jonathan Alexander (jma)
@@ -114,24 +112,85 @@ public class SongList {
     public SongIterator iterator() {
         return new SongIterator();
     }
-    
+
+
     /**
      * sorts the song list by artist using selection sort
      * 
      */
     public void sortByArtist() {
-       for(Node start = head; start != tail; start = start.getNext()) {
-           Node largest = start;
-           for(Node curr = start; curr != null; curr = curr.getNext()) {
-               if(largest.getData().compareArtist(curr.getData()) < 0) {
-                   largest = curr;
-               }
-           }
-           Song tmp = start.getData();
-           start.setData(largest.getData());
-           largest.setData(tmp);
-           
-       }
+        for (Node start = head; start != tail; start = start.getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareArtist(curr.getData()) < 0) {
+                    largest = curr;
+                }
+            }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
+        }
+    }
+
+
+    /**
+     * sorts the song list by Genre using selection sort
+     * 
+     */
+    public void sortByGenre() {
+        for (Node start = head; start != tail; start = start.getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareGenre(curr.getData()) < 0) {
+                    largest = curr;
+                }
+            }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
+        }
+    }
+
+
+    /**
+     * sorts the song list by year using selection sort
+     * 
+     */
+    public void sortByYear() {
+        for (Node start = head; start != tail; start = start.getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareYear(curr.getData()) < 0) {
+                    largest = curr;
+                }
+            }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
+        }
+    }
+
+
+    /**
+     * sorts the song list by title using selection sort
+     * 
+     */
+    public void sortByTitle() {
+        for (Node start = head; start != tail; start = start.getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareTitle(curr.getData()) < 0) {
+                    largest = curr;
+                }
+            }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
+        }
     }
 
 
@@ -178,17 +237,19 @@ public class SongList {
         private Song getData() {
             return data;
         }
+
+
         private void setData(Song d) {
             data = d;
         }
 
 
         private void remove() {
-            if(prev != null) {
+            if (prev != null) {
                 prev.setNext(next);
             }
-            if(next != null) {
-            next.setPrevious(prev);
+            if (next != null) {
+                next.setPrevious(prev);
             }
         }
 
@@ -230,17 +291,6 @@ public class SongList {
             Node toReturn = next;
             next = next.getNext();
             return toReturn;
-        }
-
-
-        /**
-         * gets the node after the iterator without moving it
-         * 
-         * @return the node after the iterator which will be returned on the
-         *         next next() call;
-         */
-        private Node getNext() {
-            return next;
         }
 
     }
