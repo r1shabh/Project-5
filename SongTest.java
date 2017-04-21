@@ -23,7 +23,7 @@ public class SongTest extends student.TestCase {
         song2 = new Song("Same Drugs", "Chance the Rapper", 2016, "Rap");
         response10 = new Response(HobbyEnum.READ, MajorEnum.COMPUTER_SCIENCE, RegionEnum.NORTHEAST, true, true);
         response11 = new Response(HobbyEnum.READ, MajorEnum.COMPUTER_SCIENCE, RegionEnum.NORTHEAST, true, true);
-        response20 = new Response(HobbyEnum.ART, MajorEnum.MATH_OR_CDMA, RegionEnum.SOUTHEAST, false, false);
+        response20 = new Response(HobbyEnum.ART, MajorEnum.MATH_OR_CMDA, RegionEnum.SOUTHEAST, false, false);
         response30 = new Response(HobbyEnum.MUSIC, MajorEnum.OTHER, RegionEnum.REST, false, true);
         
     }
