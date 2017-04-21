@@ -1,4 +1,4 @@
-package MusicPreferenceVisualization;
+package prj5;
 
 public class ResponseTest extends student.TestCase{
     private Response testResponse;
