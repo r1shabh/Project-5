@@ -2,6 +2,7 @@ package prj5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -77,6 +78,7 @@ public class FileReader {
         input.nextLine();
         input.nextLine();
         while (input.hasNext()) {
+            ArrayList<Response> responses = new ArrayList<>();
             input.next();
             input.next();
             MajorEnum major = this.setMajor(input.next());
@@ -93,12 +95,12 @@ public class FileReader {
                 }
                 Response response = new Response(hobby, major, region, heard,
                     false);
-                songs.getEntry(i).addResponse(response);
+                responses.add(response);
+                //songs.getEntry(i).addResponse(response);
             }
-            input.nextLine();
+            //input.nextLine();
 
-            /*for (int x = 0; x < songs.getLength(); x++) {
-                System.out.print(x + " ");
+            for (int x = 0; x < responses.size() - 1; x++) {
                 boolean liked;
                 String isLiked = input.next();
                 if (isLiked.equals("Yes")) {
@@ -107,9 +109,21 @@ public class FileReader {
                 else {
                     liked = false;
                 }
-                System.out.println(songs.getEntry(x+1).toString());
-                songs.getEntry(x+1).editResponse(x+1, liked);
-            }*/
+                responses.get(x).setLiked(liked);
+                Response r = responses.get(x);
+                songs.getEntry(x+1).addResponse(r);
+            }
+            boolean liked;
+            String isLiked = input.nextLine();
+            if (isLiked.equals("Yes")) {
+                liked = true;
+            }
+            else {
+                liked = false;
+            }
+            responses.get(responses.size()-1).setLiked(liked);
+            Response r = responses.get(responses.size()-1);
+            songs.getEntry(songs.getLength()).addResponse(r);
         }
         input.close();
     }
