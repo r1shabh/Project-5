@@ -54,8 +54,9 @@ public class FileReader {
             genre = genre.substring(1);
             //System.out.println(genre);
             Song song = new Song(title, artist, year, genre);
-            System.out.println(song.toString());
+            //System.out.println(x + " " + song.toString());
             songs.add(song);
+            //System.out.println(x + " " + songs.getEntry(x).toString());
             //System.out.println(input.nextLine());
         }
         input.close();
@@ -73,17 +74,16 @@ public class FileReader {
     public void readSurveyFile(String filename) throws FileNotFoundException {
         Scanner input = new Scanner(new File(filename));
         input.useDelimiter(",");
-        System.out.println(input.nextLine());
-        System.out.println(input.nextLine());
+        input.nextLine();
+        input.nextLine();
         while (input.hasNext()) {
-            System.out.print(input.next() + " ");
-            System.out.println(input.next() + " ");
+            input.next();
+            input.next();
             MajorEnum major = this.setMajor(input.next());
-            System.out.println("" + major);
             RegionEnum region = this.setRegion(input.next());
             HobbyEnum hobby = this.setHobby(input.next());
             String hasHeard = input.next();
-            for (int i = 0; i < songs.getLength(); i++) {
+            for (int i = 1; i <= songs.getLength(); i++) {
                 boolean heard;
                 if (hasHeard.equals("Yes")) {
                     heard = true;
@@ -95,12 +95,9 @@ public class FileReader {
                     false);
                 songs.getEntry(i).addResponse(response);
             }
-            for (int z = 0; z < songs.getLength(); z++) {
-                System.out.print(z+1 + " ");
-                System.out.println(songs.getEntry(z).toString());
-            }
+            input.nextLine();
 
-            for (int x = 0; x < songs.getLength() - 1; x++) {
+            /*for (int x = 0; x < songs.getLength(); x++) {
                 System.out.print(x + " ");
                 boolean liked;
                 String isLiked = input.next();
@@ -110,20 +107,9 @@ public class FileReader {
                 else {
                     liked = false;
                 }
-                System.out.println(songs.getEntry(x).toString());
-                songs.getEntry(x).editResponse(x, liked);
-            }
-            boolean liked;
-            String isLiked = input.nextLine();
-            isLiked = isLiked.substring(1);
-            if (isLiked.equals("Yes")) {
-                liked = true;
-            }
-            else {
-                liked = false;
-            }
-            songs.getEntry(songs.getLength() - 1).editResponse(songs.getLength()
-                - 1, liked);
+                System.out.println(songs.getEntry(x+1).toString());
+                songs.getEntry(x+1).editResponse(x+1, liked);
+            }*/
         }
         input.close();
     }
