@@ -1,33 +1,39 @@
 package prj5;
 
 import java.util.Observable;
+import java.util.Observer;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
-public class DisplayWindow {
-    private static final int TOPLEFT;
-    private static final int TOPMIDDLE;
-    private static final int TOPRIGHT;
-    private static final int BOTTOMLEFT;
-    private static final int BOTTOMMIDDLE;
-    private static final int BOTTOMRIGHT;
+
+public class DisplayWindow implements Observer {
+    private static int TOPLEFT;
+    private static int TOPMIDDLE;
+    private static int TOPRIGHT;
+    private static int BOTTOMLEFT;
+    private static int BOTTOMMIDDLE;
+    private static int BOTTOMRIGHT;
     private Window window;
-    public DisplayWindow() {
+    private SongGraph graph;
+
+
+    public DisplayWindow(SongList songs) {
+        graph = new SongGraph(songs);
+        graph.addObserver(this);
         window = new Window("Music Preference Visualization");
         int width = window.getGraphPanelWidth();
-        int aFourth = width/4;
+        int aFourth = width / 4;
         int height = window.getGraphPanelHeight();
-        int aThird = height/3;
+        int aThird = height / 3;
         TOPLEFT = aFourth;
-        TOPMIDDLE = 2*aFourth;
-        TOPRIGHT = 3*aFourth;
-        BOTTOMLEFT = 
-        BOTTOMMIDDLE = 
-        BOTTOMRIGHT = 
+        TOPMIDDLE = 2 * aFourth;
+        TOPRIGHT = 3 * aFourth;
+        // BOTTOMLEFT = BOTTOMMIDDLE = BOTTOMRIGHT =
         makePersistantButtons();
 
-
     }
+
+
     private void makePersistantButtons() {
         Button displayHobby = new Button("Hobby");
         displayHobby.onClick(this, "clickedHobby");
@@ -57,40 +63,64 @@ public class DisplayWindow {
         window.addButton(sortArtist, WindowSide.NORTH);
         window.addButton(next, WindowSide.NORTH);
     }
-    //Methods to change the data based on different response attributes
+
+
+    // Methods to change the data based on different response attributes
     /**
      * Method to change the screen when user clicks by hobby button
      */
     private void clickedHobby() {
-        
+
     }
+
+
     private void clickedMajor() {
-        
+
     }
+
+
     private void clickedState() {
-        
+
     }
-    //Methods to change the songs on screen based on various 
-    //sorting orders
+
+
+    // Methods to change the songs on screen based on various
+    // sorting orders
     public void clickedSortGenre() {
-        
+
     }
+
+
     public void clickedSortArtist() {
-        
+
     }
+
+
     public void clickedSortTitle() {
-        
+
     }
+
+
     public void clickedSortYear() {
-        
+
     }
-    //Methods to change the songs on screen based on if the user clicks 
-    //To sort a different way
+
+
+    // Methods to change the songs on screen based on if the user clicks
+    // To sort a different way
     public void clickedNext() {
-        
+
     }
+
+
     public void clickedPrevious() {
-        
+
+    }
+
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        // TODO Auto-generated method stub
+
     }
 }
-
