@@ -3,6 +3,7 @@ package prj5;
 import java.util.Observable;
 import java.util.Observer;
 import CS2114.Button;
+import CS2114.Shape;
 import CS2114.Window;
 import CS2114.WindowSide;
 
@@ -15,6 +16,7 @@ public class DisplayWindow implements Observer {
     private static int BOTTOMRIGHT;
     private Window window;
     private SongGraph graph;
+    private int pageNum;
 
 
     public DisplayWindow(SongList songs) {
@@ -35,11 +37,11 @@ public class DisplayWindow implements Observer {
 
 
     private void makePersistantButtons() {
-        Button displayHobby = new Button("Hobby");
+        Button displayHobby = new Button("Represent Hobby");
         displayHobby.onClick(this, "clickedHobby");
-        Button displayMajor = new Button("Major");
+        Button displayMajor = new Button("Represent Major");
         displayMajor.onClick(this, "clickedMajor");
-        Button displayState = new Button("State");
+        Button displayState = new Button("Represent Region");
         displayState.onClick(this, "clickedState");
         Button previous = new Button("Previous");
         previous.onClick(this, "clickedPrevious");
@@ -53,9 +55,12 @@ public class DisplayWindow implements Observer {
         sortArtist.onClick(this, "clickedSortArtist");
         Button next = new Button("Next");
         next.onClick(this, "clickedNext");
+        Button quit = new Button("Quit");
+        quit.onClick(this, "clickedQuit");
         window.addButton(displayHobby, WindowSide.SOUTH);
         window.addButton(displayMajor, WindowSide.SOUTH);
         window.addButton(displayState, WindowSide.SOUTH);
+        window.addButton(quit, WindowSide.SOUTH);
         window.addButton(previous, WindowSide.NORTH);
         window.addButton(sortGenre, WindowSide.NORTH);
         window.addButton(sortTitle, WindowSide.NORTH);
@@ -68,9 +73,50 @@ public class DisplayWindow implements Observer {
     // Methods to change the data based on different response attributes
     /**
      * Method to change the screen when user clicks by hobby button
+     * @param pageNum is the number of the page it is on to 
+     * find what songs should be displayed
      */
-    private void clickedHobby() {
-
+    private void clickedHobby(int pageNum) {
+        Shape[][] display = (Shape[][])graph.graphHobby();
+        int startNum = (pageNum * 9) - 1;
+        int endNum = startNum + 9;
+        for (int i = startNum; i < endNum; i++) {
+            for (int j = 0; j < display[0].length; i++) {
+                Shape temp = (Shape)display[i][j];
+                int width = 0;
+                switch (i) {
+                    case 0: case 3: case 6:
+                        width = 1;
+                        break;
+                    case 1: case 4: case 7:
+                        width = 2;
+                        break;
+                    case 2: case 5: case 8:
+                        width = 3;
+                        break;
+                }
+                int height =0;
+                switch (i) {
+                    case 1: case 2: case 3:
+                        height = 1;
+                        break;
+                    case 4: case 5: case 6:
+                        height = 2;
+                        break;
+                    case 7: case 8: case 9:
+                        height = 3;
+                        break;
+                }
+                int coloum = (window.getGraphPanelWidth() / 3) * width;
+                int row = (window.getGraphPanelHeight() / 3) * height;
+                temp.move(coloum, row);
+                window.addShape(temp);
+            }
+        }
+    }
+    
+    public void clickedQuit() {
+        System.exit(0);
     }
 
 

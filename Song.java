@@ -225,7 +225,62 @@ public class Song {
         }
         return count;
     }
-
+    
+    
+    /**
+     * gets percent of people who liked song
+     * by the hobby
+     * @return is percent of those who liked it in each hobby
+     */
+    public int getPercentLiked(HobbyEnum hobby) {
+        return getLikes(hobby) / responses.size();
+    }
+    
+    /**
+     * gets percent of people who liked song
+     * by the major
+     * @return is percent of those who liked it in each major
+     */
+    public int getPercentLiked(MajorEnum major) {
+        return getLikes(major) / responses.size();
+    }
+    
+    /**
+     * gets percent of people who liked song
+     * by the region
+     * @return is percent of those who liked it in each region
+     */
+    public int getPercentLiked(RegionEnum region) {
+        return getLikes(region) / responses.size();
+    }
+    
+    /**
+     * gets percent of people who heard song
+     * by the region
+     * @return is percent of those who liked it in each region
+     */
+    public int getPercentHeard(RegionEnum region) {
+        return getHeards(region) / responses.size();
+    }
+    
+    /**
+     * gets percent of people who heard song
+     * by the major
+     * @return is percent of those who liked it in each major
+     */
+    public int getPercentHeard(MajorEnum major) {
+        return getHeards(major) / responses.size();
+    }
+    
+    
+    /**
+     * gets percent of people who heard song
+     * by the hobby
+     * @return is percent of those who liked it in each hobby
+     */
+    public int getPercentHeard(HobbyEnum hobby) {
+        return getHeards(hobby) / responses.size();
+    }
 
 
     // ---------------------------------------------------------------------

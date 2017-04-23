@@ -1,6 +1,7 @@
 package prj5;
 
 import java.util.Observable;
+import CS2114.Shape;
 /**
  * the back end which creates the 
  * for the front end to display
@@ -28,11 +29,29 @@ public class SongGraph extends Observable{
     }
     
     /**
-     * graphs hobbies based on the enumerator suppled
-     * @param READ is the enumerator
+     * creats the bar graphs for each hobby
+     * @return object array of songs with 4 bars for each hobby
+     * 
      */
-    public void graphHobby(HobbyEnum hobby) {
+    public Object[][] graphHobby() {
+        //2d array when first is song number followed by which enum
+        Object[][] songReturn = new Object[songs.getLength()][4];
+        for (int i = 0; i < songs.getLength(); i++) {
+            int read = songs.getEntry(i).getPercentHeard(HobbyEnum.READ);
+            int art = songs.getEntry(i).getPercentHeard(HobbyEnum.ART);
+            int sports = songs.getEntry(i).getPercentHeard(HobbyEnum.SPORTS);
+            int music = songs.getEntry(i).getPercentHeard(HobbyEnum.MUSIC);
+            Shape readHeard = new Shape(read, 3);
+            Shape artHeard = new Shape(art, 3);
+            Shape sportsHeard = new Shape(sports, 3);
+            Shape musicHeard = new Shape(music, 3);
+            songReturn[i][1] = readHeard;
+            songReturn[i][2] = artHeard;
+            songReturn[i][3] = sportsHeard;
+            songReturn[i][4] = musicHeard;
+        }
         
+        return songReturn;
     }   
     
     /**
@@ -50,6 +69,6 @@ public class SongGraph extends Observable{
      */
     public void graphRegion(RegionEnum region) {
         
-    }           
+    }
     
 }
