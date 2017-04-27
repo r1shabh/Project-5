@@ -182,4 +182,30 @@ public class SongTest extends student.TestCase {
         String result = sBuilder.toString();
         assertEquals(result, song1.toString());
     }
+    
+    /**
+     * tests percent heard
+     */
+    public void testPercentHeard() {
+        song1.addResponse(response10);
+        song1.addResponse(response11);
+        song1.addResponse(response20);
+        song1.addResponse(response30);
+        assertEquals(100, song1.getPercentHeard(HobbyEnum.READ));
+        assertEquals(100, song1.getPercentHeard(MajorEnum.COMPUTER_SCIENCE));
+        assertEquals(100, song1.getPercentHeard(RegionEnum.NORTHEAST));
+    }
+    
+    /**
+     * tests percent liked
+     */
+    public void testPercentLiked() {
+        song1.addResponse(response10);
+        song1.addResponse(response11);
+        song1.addResponse(response20);
+        song1.addResponse(response30);
+        assertEquals(100, song1.getPercentLiked(HobbyEnum.READ));
+        assertEquals(100, song1.getPercentLiked(MajorEnum.COMPUTER_SCIENCE));
+        assertEquals(100, song1.getPercentLiked(RegionEnum.NORTHEAST));
+    }
 }
