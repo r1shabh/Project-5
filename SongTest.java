@@ -276,6 +276,130 @@ public class SongTest extends student.TestCase {
     }
     
     /**
+     * tests get heard
+     */
+    public void testGetHear() {
+        song1.addResponse(response10);
+        song1.addResponse(response11);
+        song1.addResponse(response20);
+        song1.addResponse(response30);
+        song1.addResponse(response30);
+        song1.addResponse(response31);
+        song1.addResponse(response31);
+        song1.addResponse(response32);
+        song1.addResponse(response33);
+        song1.addResponse(response34);
+        song1.addResponse(response35);
+        song1.addResponse(response36);
+        song1.addResponse(response37);
+        song1.addResponse(response38);
+        song1.addResponse(response39);
+        song1.addResponse(response40);
+        song1.addResponse(response41);
+        song1.addResponse(response42);
+        song1.addResponse(response43);
+        song1.addResponse(response44);
+        song1.addResponse(response45);
+        song1.addResponse(response46);
+        song1.addResponse(response47);
+        song1.addResponse(response48);
+        song1.addResponse(response49);
+        song1.addResponse(response50);
+        song1.addResponse(response51);
+        song1.addResponse(response52);
+        song1.addResponse(response53);
+        song1.addResponse(response54);
+        song1.addResponse(response55);
+        song1.addResponse(response56);
+        song1.addResponse(response57);
+        song1.addResponse(response58);
+        song1.addResponse(response59);
+        song1.addResponse(response60);
+        song1.addResponse(response61);
+        song1.addResponse(response62);
+        song1.addResponse(response63);
+        song1.addResponse(response64);
+        song1.addResponse(response65);
+        song1.addResponse(response66);
+        song1.addResponse(response67);
+        song1.addResponse(response68);
+        song1.addResponse(response69);
+        song1.addResponse(response70);
+        song1.addResponse(response71);
+        song1.addResponse(response72);
+        song1.addResponse(response73);
+        song1.addResponse(response74);
+        song1.addResponse(response75);
+        song1.addResponse(response76);
+        assertEquals(26, song1.getHeards());
+        assertEquals(9, song1.getHeards(RegionEnum.NORTHEAST));
+        assertEquals(15, song1.getHeards(MajorEnum.COMPUTER_SCIENCE));
+        assertEquals(19, song1.getHeards(HobbyEnum.READ));
+    }
+    
+    /**
+     * tests get likes
+     */
+    public void testGetLiked() {
+        song1.addResponse(response10);
+        song1.addResponse(response11);
+        song1.addResponse(response20);
+        song1.addResponse(response30);
+        song1.addResponse(response30);
+        song1.addResponse(response31);
+        song1.addResponse(response31);
+        song1.addResponse(response32);
+        song1.addResponse(response33);
+        song1.addResponse(response34);
+        song1.addResponse(response35);
+        song1.addResponse(response36);
+        song1.addResponse(response37);
+        song1.addResponse(response38);
+        song1.addResponse(response39);
+        song1.addResponse(response40);
+        song1.addResponse(response41);
+        song1.addResponse(response42);
+        song1.addResponse(response43);
+        song1.addResponse(response44);
+        song1.addResponse(response45);
+        song1.addResponse(response46);
+        song1.addResponse(response47);
+        song1.addResponse(response48);
+        song1.addResponse(response49);
+        song1.addResponse(response50);
+        song1.addResponse(response51);
+        song1.addResponse(response52);
+        song1.addResponse(response53);
+        song1.addResponse(response54);
+        song1.addResponse(response55);
+        song1.addResponse(response56);
+        song1.addResponse(response57);
+        song1.addResponse(response58);
+        song1.addResponse(response59);
+        song1.addResponse(response60);
+        song1.addResponse(response61);
+        song1.addResponse(response62);
+        song1.addResponse(response63);
+        song1.addResponse(response64);
+        song1.addResponse(response65);
+        song1.addResponse(response66);
+        song1.addResponse(response67);
+        song1.addResponse(response68);
+        song1.addResponse(response69);
+        song1.addResponse(response70);
+        song1.addResponse(response71);
+        song1.addResponse(response72);
+        song1.addResponse(response73);
+        song1.addResponse(response74);
+        song1.addResponse(response75);
+        song1.addResponse(response76);
+        assertEquals(26, song1.getLikes());
+        assertEquals(8, song1.getLikes(RegionEnum.NORTHEAST));
+        assertEquals(14, song1.getLikes(MajorEnum.COMPUTER_SCIENCE));
+        assertEquals(18, song1.getLikes(HobbyEnum.READ));
+    }
+    
+    /**
      * tests percent heard
      */
     public void testPercentHeard() {
