@@ -282,7 +282,7 @@ public class Display {
             this.song = song;
             position = pos;
             centerLine = new Shape((int)position.getX() + 15,
-                (int)position.getY() + 27, 10, window.getGraphPanelHeight() / 6, Color.BLACK); // that center black bar
+                (int)position.getY() + 27, 10, (window.getGraphPanelHeight() / 6) + 6, Color.BLACK); // that center black bar
             songInfo = new TextShape((int)position.getX() - 20, (int)position
                 .getY() - 10, this.song.getTitle(), Color.BLACK);
             songArtist = new TextShape((int)position.getX() - 20, (int)position
@@ -316,10 +316,10 @@ public class Display {
             int out = song.getPercentHeard(RegionEnum.OUTSIDE);
             int rest = song.getPercentHeard(RegionEnum.REST);
             int SE = song.getPercentHeard(RegionEnum.SOUTHEAST);
-            Shape NELine = new Shape(centerLine.getX() - NE, centerLine.getY() + 5, NE, 20, Color.BLUE);
-            Shape outLine = new Shape(centerLine.getX() - out, centerLine.getY() + 95, out, 20, Color.YELLOW);
-            Shape restLine = new Shape(centerLine.getX() - rest, centerLine.getY() + 65, rest, 20, Color.GREEN);
-            Shape SELine = new Shape(centerLine.getX() - SE, centerLine.getY() + 35, SE, 20, Color.RED);
+            Shape NELine = new Shape(centerLine.getX() - NE, centerLine.getY() + 5, NE, 20, Color.MAGENTA);
+            Shape outLine = new Shape(centerLine.getX() - out, centerLine.getY() + 95, out, 20, Color.GREEN);
+            Shape restLine = new Shape(centerLine.getX() - rest, centerLine.getY() + 65, rest, 20, Color.ORANGE);
+            Shape SELine = new Shape(centerLine.getX() - SE, centerLine.getY() + 35, SE, 20, Color.BLUE);
                 
             
             window.addShape(NELine);
@@ -331,10 +331,10 @@ public class Display {
             int outL = song.getPercentLiked(RegionEnum.OUTSIDE);
             int restL = song.getPercentLiked(RegionEnum.REST);
             int SEL = song.getPercentLiked(RegionEnum.SOUTHEAST);
-            Shape NeLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, NEL, 20, Color.BLUE);
-            Shape outLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, outL, 20, Color.YELLOW);
-            Shape restLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, restL, 20, Color.GREEN);
-            Shape SELineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, SEL, 20, Color.RED);
+            Shape NeLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, NEL, 20, Color.MAGENTA);
+            Shape outLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, outL, 20, Color.GREEN);
+            Shape restLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, restL, 20, Color.ORANGE);
+            Shape SELineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, SEL, 20, Color.BLUE);
                 
             window.addShape(NeLineL);
             window.addShape(SELineL);
@@ -347,10 +347,10 @@ public class Display {
             int math = song.getPercentHeard(MajorEnum.MATH_OR_CMDA);
             int other = song.getPercentHeard(MajorEnum.OTHER);
             int engine = song.getPercentHeard(MajorEnum.OTHER_ENGINEERING);
-            Shape CSLine = new Shape(centerLine.getX() - CS, centerLine.getY() + 5, CS, 20, Color.BLUE);
-            Shape mathLine = new Shape(centerLine.getX() - math, centerLine.getY() + 65, math, 20, Color.GREEN);
-            Shape otherLine = new Shape(centerLine.getX() - other, centerLine.getY() + 95, other, 20, Color.YELLOW);
-            Shape engineLine = new Shape(centerLine.getX() - engine, centerLine.getY() + 35, engine, 20, Color.RED);
+            Shape CSLine = new Shape(centerLine.getX() - CS, centerLine.getY() + 5, CS, 20, Color.MAGENTA);
+            Shape mathLine = new Shape(centerLine.getX() - math, centerLine.getY() + 65, math, 20, Color.ORANGE);
+            Shape otherLine = new Shape(centerLine.getX() - other, centerLine.getY() + 95, other, 20, Color.GREEN);
+            Shape engineLine = new Shape(centerLine.getX() - engine, centerLine.getY() + 35, engine, 20, Color.BLUE);
                 
             
             window.addShape(CSLine);
@@ -362,10 +362,10 @@ public class Display {
             int mathL = song.getPercentLiked(MajorEnum.MATH_OR_CMDA);
             int otherL = song.getPercentLiked(MajorEnum.OTHER);
             int engineL = song.getPercentLiked(MajorEnum.OTHER_ENGINEERING);
-            Shape CSLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, CSL, 20, Color.BLUE);
-            Shape mathLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, mathL, 20, Color.GREEN);
-            Shape otherLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, otherL, 20, Color.YELLOW);
-            Shape engineLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, engineL, 20, Color.RED);
+            Shape CSLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, CSL, 20, Color.MAGENTA);
+            Shape mathLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, mathL, 20, Color.ORANGE);
+            Shape otherLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, otherL, 20, Color.GREEN);
+            Shape engineLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, engineL, 20, Color.BLUE);
                 
             window.addShape(CSLineL);
             window.addShape(engineLineL);
@@ -383,10 +383,10 @@ public class Display {
             int music = song.getPercentHeard(HobbyEnum.MUSIC);
             int read = song.getPercentHeard(HobbyEnum.READ);
             int sports = song.getPercentHeard(HobbyEnum.SPORTS);
-            Shape artLine = new Shape(centerLine.getX() - art, centerLine.getY() + 35, art, 20, Color.RED);
-            Shape musicLine = new Shape(centerLine.getX() - music, centerLine.getY() + 95, music, 20, Color.YELLOW);
-            Shape readLine = new Shape(centerLine.getX() - read, centerLine.getY() + 5, read, 20, Color.BLUE);
-            Shape sportLine = new Shape(centerLine.getX() - sports, centerLine.getY() + 65, sports, 20, Color.GREEN);
+            Shape artLine = new Shape(centerLine.getX() - art, centerLine.getY() + 35, art, 20, Color.BLUE);
+            Shape musicLine = new Shape(centerLine.getX() - music, centerLine.getY() + 95, music, 20, Color.GREEN);
+            Shape readLine = new Shape(centerLine.getX() - read, centerLine.getY() + 5, read, 20, Color.MAGENTA);
+            Shape sportLine = new Shape(centerLine.getX() - sports, centerLine.getY() + 65, sports, 20, Color.ORANGE);
                 
             window.addShape(readLine);
             window.addShape(artLine);
@@ -397,10 +397,10 @@ public class Display {
             int musicL = song.getPercentLiked(HobbyEnum.MUSIC);
             int readL = song.getPercentLiked(HobbyEnum.READ);
             int sportsL = song.getPercentLiked(HobbyEnum.SPORTS);
-            Shape artLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, artL, 20, Color.RED);
-            Shape musicLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, musicL, 20, Color.YELLOW);
-            Shape readLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, readL, 20, Color.BLUE);
-            Shape sportLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, sportsL, 20, Color.GREEN);
+            Shape artLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 35, artL, 20, Color.BLUE);
+            Shape musicLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 95, musicL, 20, Color.GREEN);
+            Shape readLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 5, readL, 20, Color.MAGENTA);
+            Shape sportLineL = new Shape(centerLine.getX() + 10, centerLine.getY() + 65, sportsL, 20, Color.ORANGE);
                 
             window.addShape(readLineL);
             window.addShape(artLineL);
@@ -448,13 +448,13 @@ public class Display {
             square.setBackgroundColor(null);
             TextShape hobby = new TextShape(square.getX() + 5, square.getY() + 5, "Hobby Legend");
             hobby.setBackgroundColor(null);
-            TextShape read = new TextShape(hobby.getX(), square.getY() + 20, "Read", Color.BLUE);
+            TextShape read = new TextShape(hobby.getX(), square.getY() + 20, "Read", Color.MAGENTA);
             read.setBackgroundColor(null);
-            TextShape art = new TextShape(read.getX(), read.getY() + 20, "Art", Color.RED);
+            TextShape art = new TextShape(read.getX(), read.getY() + 20, "Art", Color.BLUE);
             art.setBackgroundColor(null);
-            TextShape sports = new TextShape(art.getX(), art.getY() + 20, "Sports", Color.GREEN);
+            TextShape sports = new TextShape(art.getX(), art.getY() + 20, "Sports", Color.ORANGE);
             sports.setBackgroundColor(null);
-            TextShape music = new TextShape(sports.getX(), sports.getY() + 20, "Music", Color.YELLOW);
+            TextShape music = new TextShape(sports.getX(), sports.getY() + 20, "Music", Color.GREEN);
             music.setBackgroundColor(null);
             TextShape song = new TextShape(music.getX(), music.getY() + 20, "Song Title", Color.BLACK);
             song.setBackgroundColor(null);
@@ -482,13 +482,13 @@ public class Display {
             square.setBackgroundColor(null);
             TextShape region = new TextShape(square.getX() + 5, square.getY() + 5, "Region Legend");
             region.setBackgroundColor(null);
-            TextShape NE = new TextShape(region.getX(), square.getY() + 20, "North East", Color.BLUE);
+            TextShape NE = new TextShape(region.getX(), square.getY() + 20, "North East", Color.MAGENTA);
             NE.setBackgroundColor(null);
-            TextShape SE = new TextShape(NE.getX(), NE.getY() + 20, "South East", Color.RED);
+            TextShape SE = new TextShape(NE.getX(), NE.getY() + 20, "South East", Color.BLUE);
             SE.setBackgroundColor(null);
-            TextShape rest = new TextShape(SE.getX(), SE.getY() + 20, "Rest of US", Color.GREEN);
+            TextShape rest = new TextShape(SE.getX(), SE.getY() + 20, "Rest of US", Color.ORANGE);
             rest.setBackgroundColor(null);
-            TextShape out = new TextShape(rest.getX(), rest.getY() + 20, "Out of US", Color.YELLOW);
+            TextShape out = new TextShape(rest.getX(), rest.getY() + 20, "Out of US", Color.GREEN);
             out.setBackgroundColor(null);
             TextShape song = new TextShape(out.getX(), out.getY() + 20, "Song Title", Color.BLACK);
             song.setBackgroundColor(null);
@@ -516,13 +516,13 @@ public class Display {
             square.setBackgroundColor(null);
             TextShape major = new TextShape(square.getX() + 5, square.getY() + 5, "Major Legend");
             major.setBackgroundColor(null);
-            TextShape CS = new TextShape(major.getX(), square.getY() + 20, "Computer Science", Color.BLUE);
+            TextShape CS = new TextShape(major.getX(), square.getY() + 20, "Computer Science", Color.MAGENTA);
             CS.setBackgroundColor(null);
-            TextShape otherE = new TextShape(CS.getX(), CS.getY() + 20, "Other Engineering", Color.RED);
+            TextShape otherE = new TextShape(CS.getX(), CS.getY() + 20, "Other Engineering", Color.BLUE);
             otherE.setBackgroundColor(null);
-            TextShape math = new TextShape(otherE.getX(), otherE.getY() + 20, "Math/CMDA", Color.GREEN);
+            TextShape math = new TextShape(otherE.getX(), otherE.getY() + 20, "Math/CMDA", Color.ORANGE);
             math.setBackgroundColor(null);
-            TextShape other = new TextShape(math.getX(), math.getY() + 20, "Other", Color.YELLOW);
+            TextShape other = new TextShape(math.getX(), math.getY() + 20, "Other", Color.GREEN);
             other.setBackgroundColor(null);
             TextShape song = new TextShape(other.getX(), other.getY() + 20, "Song Title", Color.BLACK);
             song.setBackgroundColor(null);
