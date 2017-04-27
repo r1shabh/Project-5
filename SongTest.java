@@ -10,6 +10,7 @@ public class SongTest extends student.TestCase {
     
     private Song song1;
     private Song song2;
+    private Song song3;
     private Response response10;
     private Response response20;
     private Response response30;
@@ -68,6 +69,7 @@ public class SongTest extends student.TestCase {
     public void setUp() {
         song1 = new Song("Boy named Sue", "Johnny Cash", 1969, "Country");
         song2 = new Song("Same Drugs", "Chance the Rapper", 2016, "Rap");
+        song3 = new Song("Boy named Sue", "Johnny Cash", 1969, "Country");
         response10 = new Response(HobbyEnum.READ, MajorEnum.COMPUTER_SCIENCE, RegionEnum.NORTHEAST, true, true);
         response11 = new Response(HobbyEnum.READ, MajorEnum.COMPUTER_SCIENCE, RegionEnum.NORTHEAST, true, true);
         response20 = new Response(HobbyEnum.ART, MajorEnum.MATH_OR_CMDA, RegionEnum.SOUTHEAST, false, false);
@@ -520,5 +522,19 @@ public class SongTest extends student.TestCase {
         assertEquals(51, song1.getPercentLiked(HobbyEnum.READ));
         assertEquals(51, song1.getPercentLiked(MajorEnum.COMPUTER_SCIENCE));
         assertEquals(53, song1.getPercentLiked(RegionEnum.NORTHEAST));
+    }
+    
+    /**
+     * tests the equals method
+     */
+    public void testEquals() {
+        assertFalse(song1.equals(null));
+        assertTrue(song1.equals(song1));
+        assertFalse(song1.equals(song2));
+        assertFalse(song1.equals("Test"));
+        song2.addResponse(response20);
+        assertFalse(song1.equals(song2));
+        assertTrue(song1.equals(song3));
+        
     }
 }
