@@ -1,8 +1,10 @@
 package prj5;
 
-import java.util.ListIterator;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
-import list.ListInterface;
+import java.util.Scanner;
 
 /**
  * @author Jonathan Alexander (jma)
@@ -18,11 +20,12 @@ public class SongList {
     private int length; // The current number of elements in the linked list
 
 
+    /**
+     * public constructor sets up initial conditions
+     */
     public SongList() {
-        head = new Node();
-        tail = new Node();
-        //head = null; // By default head is null as there are no nodes
-        //tail = null; // By default tail is null as there are no nodes
+        head = null; // By default head is null as there are no nodes
+        tail = null; // By default tail is null as there are no nodes
         length = 0; // By default the length is 0 as there are no nodes
     }
 
@@ -34,20 +37,19 @@ public class SongList {
      *            the entry to be added to the list
      */
     public void add(Song newEntry) {
-        if (length == 0) {
-            Node newNode = new Node(head, tail, newEntry);
-            head.setNext(newNode);
-            tail.setPrevious(newNode);
+
+        if (isEmpty()) {
+            Node newNode = new Node(null, null, newEntry);
+            head = newNode;
+            tail = newNode;
             length++;
         }
         else {
-            Node end = new Node(tail.getPrevious(), tail, newEntry);
-            tail.getPrevious().setNext(end);
-            tail.setPrevious(end);
-            //Node newLast = new Node(tail, null, newEntry);
-            //tail.setNext(newLast);
-            //tail = newLast;
+            Node newNode = new Node(tail, null, newEntry);
+            tail.setNext(newNode);
+            tail = newNode;
             length++;
+
         }
     }
 
@@ -58,10 +60,9 @@ public class SongList {
      * 
      */
     public void clear() {
-        head.setNext(null);
-        tail.setPrevious(null);
-        //head = null; // By default head is null as there are no nodes
-        //tail = null; // By default tail is null as there are no nodes
+
+        head = null; // By default head is null as there are no nodes
+        tail = null; // By default tail is null as there are no nodes
         length = 0; // By default the length is 0 as there are no nodes
     }
 
@@ -74,11 +75,28 @@ public class SongList {
      * @return the element at the given position
      */
     public Song getEntry(int givenPosition) {
-        Node current = head.getNext();
-        for (int i = 1; i < givenPosition; i++) {
+        Node current = head;
+        for (int i = 0; i < givenPosition; i++) {
             current = current.getNext();
         }
         return current.getData();
+    }
+
+
+    /**
+     * sets the entry at the given position
+     * 
+     * @param givenPosition
+     *            position to be changed
+     * @param song
+     *            new song
+     */
+    public void setEntry(int givenPosition, Song song) {
+        Node current = head;
+        for (int i = 0; i < givenPosition; i++) {
+            current = current.getNext();
+        }
+        current.setData(song);
     }
 
 
@@ -109,7 +127,7 @@ public class SongList {
      */
     public Object[] toArray() {
         Object[] toReturn = new Object[length];
-        Node current = head.getNext();
+        Node current = head;
         for (int i = 0; i <= length - 1; i++) {
             toReturn[i] = current.getData();
             current = current.getNext();
@@ -119,49 +137,56 @@ public class SongList {
 
 
     /**
-     * Creates a new iterator for the songList and returns ig
+     * Creates a new iterator for the songList and returns it
      * 
      * @return a new SongIterator
      */
+
     public SongIterator iterator() {
         return new SongIterator();
     }
-    
+
+
     /**
      * sorts the song list by artist using selection sort
      * 
      */
     public void sortByArtist() {
-       for(Node start = head; start != tail; start = start.getNext()) {
-           Node largest = start;
-           for(Node curr = start; curr != null; curr = curr.getNext()) {
-               if(largest.getData().compareArtist(curr.getData()) < 0) {
-                   largest = curr;
-               }
-           }
-           Song tmp = start.getData();
-           start.setData(largest.getData());
-           largest.setData(tmp);
-           
-       }
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareArtist(currNext) > 0) {
+                    sorted = false;
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
+                }
+            }
+        }
     }
-    
+
+
     /**
      * sorts the song list by Genre using selection sort
      * 
      */
     public void sortByGenre() {
-        for (Node start = head; start != tail; start = start.getNext()) {
-            Node largest = start;
-            for (Node curr = start; curr != null; curr = curr.getNext()) {
-                if (largest.getData().compareGenre(curr.getData()) < 0) {
-                    largest = curr;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareGenre(currNext) > 0) {
+                    sorted = false;
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
-            Song tmp = start.getData();
-            start.setData(largest.getData());
-            largest.setData(tmp);
-
         }
     }
 
@@ -171,17 +196,19 @@ public class SongList {
      * 
      */
     public void sortByYear() {
-        for (Node start = head; start != tail; start = start.getNext()) {
-            Node largest = start;
-            for (Node curr = start; curr != null; curr = curr.getNext()) {
-                if (largest.getData().compareYear(curr.getData()) < 0) {
-                    largest = curr;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareYear(currNext) > 0) {
+                    sorted = false;
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
-            Song tmp = start.getData();
-            start.setData(largest.getData());
-            largest.setData(tmp);
-
         }
     }
 
@@ -191,18 +218,130 @@ public class SongList {
      * 
      */
     public void sortByTitle() {
-        for (Node start = head; start != tail; start = start.getNext()) {
-            Node largest = start;
-            for (Node curr = start; curr != null; curr = curr.getNext()) {
-                if (largest.getData().compareTitle(curr.getData()) < 0) {
-                    largest = curr;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareTitle(currNext) > 0) {
+                    sorted = false;
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
-            Song tmp = start.getData();
-            start.setData(largest.getData());
-            largest.setData(tmp);
-
         }
+    }
+
+
+    /**
+     * reads in the responses pertaining to this list of songs
+     * 
+     * @param fileName
+     *            the string of the file
+     * @throws FileNotFoundException
+     *             If the file passed cannot be founds
+     */
+    public void readResponses(String fileName) throws FileNotFoundException {
+        File responseFile = new File(fileName);
+        Scanner in = new Scanner(responseFile);
+        in.useDelimiter(",");
+        in.nextLine();
+        in.nextLine();
+        while (in.hasNextLine()) {
+            in.next(); // skip the response number
+            in.next(); // skip the response date
+            HobbyEnum hobby;
+            MajorEnum major; // The data we need for the response header
+            RegionEnum region;
+            switch (in.next()) { // match and set major
+                case "Math or CMDA":
+                    major = MajorEnum.MATH_OR_CMDA;
+                    break;
+                case "Other Engineering":
+                    major = MajorEnum.OTHER_ENGINEERING;
+                    break;
+                case "Computer Science":
+                    major = MajorEnum.COMPUTER_SCIENCE;
+                    break;
+                case "Other":
+                    major = MajorEnum.OTHER;
+                    break;
+                default:
+                    major = null;
+                    break;
+
+            }
+            switch (in.next()) { // match and set region
+                case "Northeast":
+                    region = RegionEnum.NORTHEAST;
+                    break;
+                case "Southeast":
+                    region = RegionEnum.SOUTHEAST;
+                    break;
+                case "Outside of United States":
+                    region = RegionEnum.OUTSIDE;
+                    break;
+                case "United States (other than Southeast or Northwest)":
+                    region = RegionEnum.REST;
+                    break;
+                default:
+                    region = null;
+                    break; // trying to pull null pointer by doing this to let
+                           // us know the switch isn't working
+            }
+            switch (in.next()) { // match and set hobby
+                case "sports":
+                    hobby = HobbyEnum.SPORTS;
+                    break;
+                case "music":
+                    hobby = HobbyEnum.MUSIC;
+                    break;
+                case "reading":
+                    hobby = HobbyEnum.READ;
+                    break;
+                case "art":
+                    hobby = HobbyEnum.ART;
+                    break;
+                default:
+                    hobby = null;
+                    break;
+            }
+// String[] heard = new String[length];
+// for (int i = 0; i < length; i++) {
+// String curr = in.next();
+// heard[i] = curr;
+// }
+// String[] liked = new String[length];
+// for (int i = 0; i < length; i++) {
+// String curr = in.next();
+// liked[i] = curr;
+// }
+            SongIterator iterator = iterator();
+            for (int i = 0; i < length; i++) {
+                Song currentSong = iterator.next();
+                String heard = in.next();
+                String liked = in.next();
+                if (major == null || hobby == null || region == null || heard
+                    .equals("") || liked.equals("")) { // Things that would
+                    // disqualify this
+                    // response from being
+                    // added
+                    break;
+                }
+                else {
+                    Response toAdd = new Response(hobby, major, region, heard
+                        .equals("Yes"), liked.equals("Yes"));
+                    currentSong.addResponse(toAdd);
+
+                }
+
+            }
+
+            in.nextLine();
+        }
+        in.close();
     }
 
 
@@ -214,14 +353,11 @@ public class SongList {
      *
      */
     private class Node {
-        Song data;
-        Node next;
-        Node prev;
-        
-        private Node() {
-            this(null, null, null);
-        }
-        
+        private Song data;
+        private Node next;
+        private Node prev;
+
+
         private Node(Node before, Node after, Song song) {
             this.data = song;
             this.next = after;
@@ -249,10 +385,11 @@ public class SongList {
         }
 
 
-        private Song getData() {
+        Song getData() {
             return data;
         }
-        
+
+
         private void setData(Song d) {
             data = d;
         }
@@ -266,8 +403,8 @@ public class SongList {
     }
 
 
-    private class SongIterator {
-        Node next;
+    protected class SongIterator {
+        private Node next;
 
 
         /**
@@ -283,8 +420,9 @@ public class SongList {
          * 
          * @return true if there is, false otherwise
          */
-        private boolean hasNext() {
-            return next == null;
+        public boolean hasNext() {
+
+            return next != null;
         }
 
 
@@ -293,14 +431,15 @@ public class SongList {
          * 
          * @return the next node
          */
-        private Node next() {
+        public Song next() {
+
             if (!hasNext()) {
                 throw new NoSuchElementException(
                     "Tried to call next() without a next node");
             }
             Node toReturn = next;
             next = next.getNext();
-            return toReturn;
+            return toReturn.getData();
         }
 
 
@@ -310,8 +449,8 @@ public class SongList {
          * @return the node after the iterator which will be returned on the
          *         next next() call;
          */
-        private Node getNext() {
-            return next;
+        public Song getNext() {
+            return next.getData();
         }
 
     }

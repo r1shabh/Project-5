@@ -49,8 +49,16 @@ public class SongListTest extends student.TestCase{
      * tests the get entry method
      */
     public void testGetEntry() {
-        assertEquals(song1, sl1.getEntry(1));
-        assertEquals(song2, sl1.getEntry(2));
+        assertEquals(song1, sl1.getEntry(0));
+        assertEquals(song2, sl1.getEntry(1));
+    }
+    
+    /**
+     * tests the set entry method
+     */
+    public void testSetEntry() {
+        sl1.setEntry(0, song2);
+        assertEquals(song2, sl1.getEntry(0));
     }
     
     /**
@@ -69,8 +77,13 @@ public class SongListTest extends student.TestCase{
      * tests the sort by artist
      */
     public void testSortByArtist() {
+        Object[] sl1array = sl1.toArray();
+        Object[] sl2array = sl2.toArray();
+        assertFalse(Arrays.equals(sl1array, sl2array));
         sl1.sortByArtist();
-        assertEquals(sl2, sl1);
+        sl1array = sl1.toArray();
+        sl2array = sl2.toArray();
+        assertTrue(Arrays.equals(sl1array, sl2array));
     }
 
 }
