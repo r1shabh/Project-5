@@ -140,6 +140,15 @@ public class SongListTest extends student.TestCase {
         assertEquals(song3, sl2.getEntry(3));
         assertEquals(4, sl2.getLength());
         assertFalse(sl2.isEmpty());
+        
+       for (int i = 0; i < 10; i++) {
+           sl2.add(song1);
+           sl2.add(song3);
+       }
+       assertEquals(song2, sl2.getEntry(0));
+       assertEquals(song1, sl2.getEntry(1));
+       assertEquals(song3, sl2.getEntry(2));
+       assertEquals(song3, sl2.getEntry(3));
 
     }
 
@@ -153,6 +162,14 @@ public class SongListTest extends student.TestCase {
         assertEquals(song2, sl2.getEntry(1));
         assertEquals(song3, sl2.getEntry(2));
         assertEquals(3, sl2.getLength());
+        
+        for (int i = 0; i < 10; i++) {
+            sl2.add(song1);
+            sl2.add(song3);
+        }
+        assertEquals(song1, sl2.getEntry(0));
+        assertEquals(song2, sl2.getEntry(1));
+        assertEquals(song3, sl2.getEntry(2));
     }
 
 
@@ -165,6 +182,14 @@ public class SongListTest extends student.TestCase {
         assertEquals(song3, sl2.getEntry(1));
         assertEquals(song2, sl2.getEntry(2));
         assertEquals(3, sl2.getLength());
+        
+        for (int i = 0; i < 10; i++) {
+            sl2.add(song1);
+            sl2.add(song3);
+        }
+        assertEquals(song1, sl2.getEntry(0));
+        assertEquals(song3, sl2.getEntry(1));
+        assertEquals(song2, sl2.getEntry(2));
     }
 
 
