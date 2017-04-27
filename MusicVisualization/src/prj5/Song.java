@@ -90,19 +90,6 @@ public class Song {
 
 
     /**
-     * edits the response of whether someone likes a song
-     * 
-     * @param index
-     *            index of response to be edited
-     * @param liked
-     *            the edit made to response
-     */
-    public void editResponse(int index, boolean liked) {
-        responses.get(index).setLiked(liked);
-    }
-
-
-    /**
      * Tells how many responses there are for this song
      * 
      * @return the number of responses there are for this song
@@ -112,11 +99,13 @@ public class Song {
     }
 
 
-    // ---------------------------------------------------------------------
-    // COUNTERS FOR RESPONSES THAT HAVE HERD THE SONG FOR EACH OF THE CATEGORIES
+   
+    // COUNTERS FOR RESPONSES THAT HAVE HERD THE SONG IS IT DOIN IT
     /**
      * public getter for the total number of
      * people who responded that they have heard this song
+     * 
+     * @return int of the number of people who said thy heard the song
      */
     public int getHeards() {
         int count = 0;
@@ -203,7 +192,8 @@ public class Song {
     /**
      * gets the total likes for the song
      * 
-     * @return
+     * @return the number of people who returned that
+     *         they like this song
      */
     public int getLikes() {
         int count = 0;
@@ -224,6 +214,9 @@ public class Song {
      * 
      * @return the number of responses that liked
      *         of the likes being counted
+     * @param hobby
+     *            the hobby enum value of the
+     *            hobby we are counting likes for
      */
     public int getLikes(HobbyEnum hobby) {
         int count = 0;
@@ -289,6 +282,8 @@ public class Song {
      * 
      * @return negative, zero, positive as the argument is greater, equal, and
      *         less
+     * @param s
+     *            the song object to compare titles with
      */
     public int compareTitle(Song s) {
         return title.compareToIgnoreCase(s.getTitle());
@@ -298,6 +293,8 @@ public class Song {
     /**
      * compares the artists of the songs lexicographically
      * 
+     * @param s
+     *            the song object to compare artists with
      * @return neg, zero, positive as the argument is greater, equal, and less
      */
     public int compareArtist(Song s) {
@@ -308,6 +305,8 @@ public class Song {
     /**
      * compares the years the songs were released
      * 
+     * @param s
+     *            the song object to compare years with
      * @return negative, zero, positive as the argument year is greater than,
      *         equal to, and less than
      */
@@ -319,6 +318,8 @@ public class Song {
     /**
      * Compares the genres of the songs using the ORDER in the Enum file
      * 
+     * @param s
+     *            the song object to compare genre with
      * @return negative, zero, positive as the argument genre is before, same,
      *         after
      */
@@ -360,7 +361,8 @@ public class Song {
             otherSong.getArtist()) && getYear() == otherSong.getYear()
             && getGenre().equals(otherSong.getGenre()));
     }
-    
+
+
     /**
      * returns the percent of people
      * who have a certain hobby that have
@@ -381,7 +383,8 @@ public class Song {
                 }
             }
         }
-        return (totalHeard / total) * 100;
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
 
 
@@ -404,10 +407,12 @@ public class Song {
                 }
             }
         }
-        return (totalLiked / total) * 100;
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
-    
-        /**
+
+
+    /**
      * returns the percent of people from a given region who
      * have heard this song
      * 
@@ -426,7 +431,8 @@ public class Song {
                 }
             }
         }
-        return (totalHeard / total) * 100;
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
 
 
@@ -448,7 +454,8 @@ public class Song {
                 }
             }
         }
-        return (totalLiked / total) * 100;
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
 
 
@@ -470,7 +477,8 @@ public class Song {
                 }
             }
         }
-        return (totalHeard / total) * 100;
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
 
 
@@ -492,7 +500,8 @@ public class Song {
                 }
             }
         }
-        return (totalLiked / total) * 100;
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return (int)temp;
     }
 
 }

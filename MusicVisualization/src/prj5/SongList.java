@@ -2,7 +2,6 @@ package prj5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -84,23 +83,6 @@ public class SongList {
 
 
     /**
-     * sets the entry at the given position
-     * 
-     * @param givenPosition
-     *            position to be changed
-     * @param song
-     *            new song
-     */
-    public void setEntry(int givenPosition, Song song) {
-        Node current = head;
-        for (int i = 0; i < givenPosition; i++) {
-            current = current.getNext();
-        }
-        current.setData(song);
-    }
-
-
-    /**
      * Gets the number of elements currently in the linked list
      * 
      * @return the number of elements in the linked list
@@ -152,19 +134,18 @@ public class SongList {
      * 
      */
     public void sortByArtist() {
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < this.length - 1; i++) {
-                Song curr = this.getEntry(i);
-                Song currNext = this.getEntry(i + 1);
-                if (curr.compareArtist(currNext) > 0) {
-                    sorted = false;
-                    Song temp = currNext;
-                    this.setEntry(i+1, curr);
-                    this.setEntry(i, temp);
+        for (Node start = head; start != tail; start = start.getNext()) {
+            Node largest = start;
+            for (Node curr = start.getNext(); curr != null; curr = curr
+                .getNext()) {
+                if (largest.getData().compareArtist(curr.getData()) > 0) {
+                    largest = curr;
                 }
             }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
         }
     }
 
@@ -174,19 +155,18 @@ public class SongList {
      * 
      */
     public void sortByGenre() {
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < this.length - 1; i++) {
-                Song curr = this.getEntry(i);
-                Song currNext = this.getEntry(i + 1);
-                if (curr.compareGenre(currNext) > 0) {
-                    sorted = false;
-                    Song temp = currNext;
-                    this.setEntry(i+1, curr);
-                    this.setEntry(i, temp);
+        for (Node start = head; start.getNext() != null; start = start
+            .getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareGenre(curr.getData()) > 0) {
+                    largest = curr;
                 }
             }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
         }
     }
 
@@ -196,19 +176,18 @@ public class SongList {
      * 
      */
     public void sortByYear() {
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < this.length - 1; i++) {
-                Song curr = this.getEntry(i);
-                Song currNext = this.getEntry(i + 1);
-                if (curr.compareYear(currNext) > 0) {
-                    sorted = false;
-                    Song temp = currNext;
-                    this.setEntry(i+1, curr);
-                    this.setEntry(i, temp);
+        for (Node start = head; start.getNext() != null; start = start
+            .getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareYear(curr.getData()) > 0) {
+                    largest = curr;
                 }
             }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
         }
     }
 
@@ -218,19 +197,18 @@ public class SongList {
      * 
      */
     public void sortByTitle() {
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < this.length - 1; i++) {
-                Song curr = this.getEntry(i);
-                Song currNext = this.getEntry(i + 1);
-                if (curr.compareTitle(currNext) > 0) {
-                    sorted = false;
-                    Song temp = currNext;
-                    this.setEntry(i+1, curr);
-                    this.setEntry(i, temp);
+        for (Node start = head; start.getNext() != null; start = start
+            .getNext()) {
+            Node largest = start;
+            for (Node curr = start; curr != null; curr = curr.getNext()) {
+                if (largest.getData().compareTitle(curr.getData()) > 0) {
+                    largest = curr;
                 }
             }
+            Song tmp = start.getData();
+            start.setData(largest.getData());
+            largest.setData(tmp);
+
         }
     }
 
@@ -358,6 +336,16 @@ public class SongList {
         private Node prev;
 
 
+        /**
+         * private constructor for a new Node
+         * 
+         * @param before
+         *            the node preceding the new node
+         * @param after
+         *            the node succeeding the new node
+         * @param song
+         *            the song object stored in the node
+         */
         private Node(Node before, Node after, Song song) {
             this.data = song;
             this.next = after;
@@ -365,36 +353,81 @@ public class SongList {
         }
 
 
+        /**
+         * Sets which node comes after this one
+         * 
+         * @param newNext
+         *            the node object that will be after
+         *            this node in the linked list
+         */
         private void setNext(Node newNext) {
             next = newNext;
         }
 
 
+        /**
+         * Sets the node that comes before this one
+         * 
+         * @param newPrev
+         *            the node object that will come
+         *            before this node in the linked list
+         */
         private void setPrevious(Node newPrev) {
             prev = newPrev;
         }
 
 
+        /**
+         * Gets the node after this node
+         * 
+         * @return the class attribute next
+         *         which should be the node after this node in the linked list
+         * 
+         */
         private Node getNext() {
             return next;
         }
 
 
+        /**
+         * Returns the node before this node
+         * 
+         * @return the class attribute previous
+         *         which should be the node
+         *         before this node in the linked list
+         */
         private Node getPrevious() {
             return prev;
         }
 
 
+        /**
+         * get the song object stored in this node
+         * 
+         * @return the song object held in the nodes
+         *         class attribute
+         */
         Song getData() {
             return data;
         }
 
 
+        /**
+         * sets the data in the nod
+         * useful for sorting
+         * 
+         * @param d
+         *            the song object that this node will now store
+         */
         private void setData(Song d) {
             data = d;
         }
 
 
+        /**
+         * remove this node from the linked list
+         * by linking the ones before and after it
+         */
         private void remove() {
             prev.setNext(next);
             next.setPrevious(prev);
@@ -403,6 +436,12 @@ public class SongList {
     }
 
 
+    /**
+     * 
+     * @author Jonathan Alexander (jma)
+     * @version 4/26/2017
+     *
+     */
     protected class SongIterator {
         private Node next;
 
