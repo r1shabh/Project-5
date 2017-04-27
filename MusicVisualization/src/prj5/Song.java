@@ -360,5 +360,51 @@ public class Song {
             otherSong.getArtist()) && getYear() == otherSong.getYear()
             && getGenre().equals(otherSong.getGenre()));
     }
+    
+    /**
+     * returns the percent of people
+     * who have a certain hobby that have
+     * heard this song
+     * 
+     * @param hobby
+     *            the given hobby
+     * @return percentage who have heard this song
+     */
+    public int getPercentHeard(HobbyEnum hobby) {
+        int total = 0;
+        int totalHeard = 0;
+        for (Response r : this.responses) {
+            if (hobby.equals(r.getHobby())) {
+                total++;
+                if (r.hasHeard()) {
+                    totalHeard++;
+                }
+            }
+        }
+        return (totalHeard / total) * 100;
+    }
+
+
+    /**
+     * returns the percentage of people who have
+     * a certain hobby like this song
+     * 
+     * @param hobby
+     *            the given hobby
+     * @return percentage who like this song
+     */
+    public int getPercentLiked(HobbyEnum hobby) {
+        int total = 0;
+        int totalLiked = 0;
+        for (Response r : this.responses) {
+            if (hobby.equals(r.getHobby())) {
+                total++;
+                if (r.liked()) {
+                    totalLiked++;
+                }
+            }
+        }
+        return (totalLiked / total) * 100;
+    }
 
 }
