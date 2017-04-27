@@ -280,7 +280,7 @@ public class SongTest extends student.TestCase {
     /**
      * tests get heard
      */
-    public void testGetHear() {
+    public void testGetHeard() {
         song1.addResponse(response10);
         song1.addResponse(response11);
         song1.addResponse(response20);
