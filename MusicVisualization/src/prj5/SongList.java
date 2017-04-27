@@ -84,6 +84,23 @@ public class SongList {
 
 
     /**
+     * sets the entry at the given position
+     * 
+     * @param givenPosition
+     *            position to be changed
+     * @param song
+     *            new song
+     */
+    public void setEntry(int givenPosition, Song song) {
+        Node current = head;
+        for (int i = 0; i < givenPosition; i++) {
+            current = current.getNext();
+        }
+        current.setData(song);
+    }
+
+
+    /**
      * Gets the number of elements currently in the linked list
      * 
      * @return the number of elements in the linked list
@@ -138,31 +155,17 @@ public class SongList {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (Node curr = head.getNext(); curr.getNext().data != null; curr =
-                curr.getNext()) {
-                Node currNext = curr.getNext();
-                if (curr.getData().compareArtist(currNext.getData()) > 0) {
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareArtist(currNext) > 0) {
                     sorted = false;
-                    Song temp = currNext.data;
-                    currNext.setData(curr.data);
-                    curr.setData(temp);
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
         }
-        /*
-         * for(Node start = head; start != tail; start = start.getNext()) {
-         * Node largest = start;
-         * for(Node curr = start; curr != null; curr = curr.getNext()) {
-         * if(largest.getData().compareArtist(curr.getData()) < 0) {
-         * largest = curr;
-         * }
-         * }
-         * Song tmp = start.getData();
-         * start.setData(largest.getData());
-         * largest.setData(tmp);
-         * 
-         * }
-         */
     }
 
 
@@ -174,31 +177,17 @@ public class SongList {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (Node curr = head; curr.getNext() != null; curr = curr
-                .getNext()) {
-                Node currNext = curr.getNext();
-                if (curr.getData().compareGenre(currNext.getData()) > 0) {
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareGenre(currNext) > 0) {
                     sorted = false;
-                    Song temp = currNext.data;
-                    currNext.setData(curr.data);
-                    curr.setData(temp);
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
         }
-        /*
-         * for (Node start = head; start != tail; start = start.getNext()) {
-         * Node largest = start;
-         * for (Node curr = start; curr != null; curr = curr.getNext()) {
-         * if (largest.getData().compareGenre(curr.getData()) < 0) {
-         * largest = curr;
-         * }
-         * }
-         * Song tmp = start.getData();
-         * start.setData(largest.getData());
-         * largest.setData(tmp);
-         * 
-         * }
-         */
     }
 
 
@@ -210,31 +199,17 @@ public class SongList {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (Node curr = head; curr.getNext() != null; curr = curr
-                .getNext()) {
-                Node currNext = curr.getNext();
-                if (curr.getData().compareYear(currNext.getData()) > 0) {
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareYear(currNext) > 0) {
                     sorted = false;
-                    Song temp = currNext.data;
-                    currNext.setData(curr.data);
-                    curr.setData(temp);
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
         }
-        /*
-         * for (Node start = head; start != tail; start = start.getNext()) {
-         * Node largest = start;
-         * for (Node curr = start; curr != null; curr = curr.getNext()) {
-         * if (largest.getData().compareYear(curr.getData()) < 0) {
-         * largest = curr;
-         * }
-         * }
-         * Song tmp = start.getData();
-         * start.setData(largest.getData());
-         * largest.setData(tmp);
-         * 
-         * }
-         */
     }
 
 
@@ -246,31 +221,17 @@ public class SongList {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (Node curr = head; curr.getNext() != null; curr = curr
-                .getNext()) {
-                Node currNext = curr.getNext();
-                if (curr.getData().compareTitle(currNext.getData()) > 0) {
+            for (int i = 0; i < this.length - 1; i++) {
+                Song curr = this.getEntry(i);
+                Song currNext = this.getEntry(i + 1);
+                if (curr.compareTitle(currNext) > 0) {
                     sorted = false;
-                    Song temp = currNext.data;
-                    currNext.setData(curr.data);
-                    curr.setData(temp);
+                    Song temp = currNext;
+                    this.setEntry(i+1, curr);
+                    this.setEntry(i, temp);
                 }
             }
         }
-        /*
-         * for (Node start = head; start != tail; start = start.getNext()) {
-         * Node largest = start;
-         * for (Node curr = start; curr != null; curr = curr.getNext()) {
-         * if (largest.getData().compareTitle(curr.getData()) < 0) {
-         * largest = curr;
-         * }
-         * }
-         * Song tmp = start.getData();
-         * start.setData(largest.getData());
-         * largest.setData(tmp);
-         * 
-         * }
-         */
     }
 
 
