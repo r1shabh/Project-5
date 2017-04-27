@@ -9,6 +9,7 @@ import java.util.ListIterator;
  *
  */
 public class Song {
+
     private String title;
     private String artist;
     private int year;
@@ -87,6 +88,20 @@ public class Song {
         responses.add(r);
     }
 
+
+    /**
+     * edits the response of whether someone likes a song
+     * 
+     * @param index
+     *            index of response to be edited
+     * @param liked
+     *            the edit made to response
+     */
+    public void editResponse(int index, boolean liked) {
+        responses.get(index).setLiked(liked);
+    }
+
+
     /**
      * Tells how many responses there are for this song
      * 
@@ -99,6 +114,24 @@ public class Song {
 
     // ---------------------------------------------------------------------
     // COUNTERS FOR RESPONSES THAT HAVE HERD THE SONG FOR EACH OF THE CATEGORIES
+    /**
+     * public getter for the total number of
+     * people who responded that they have heard this song
+     */
+    public int getHeards() {
+        int count = 0;
+        ListIterator<Response> iterator = responses.listIterator();
+        while (iterator.hasNext()) {
+            Response current = iterator.next();
+            if (current.hasHeard()) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+
     /**
      * Gets how many of the responses have heard the song with a certain hobby
      * 
@@ -140,6 +173,8 @@ public class Song {
         }
         return count;
     }
+
+
     /**
      * Gets how many of the responses have heard the song in a certain region
      * 
@@ -166,10 +201,29 @@ public class Song {
     // COUNTERS FOR THE NUMBER OF RESPONSES THAT LIKE THE SONG FOR THE DIFFERENT
     // CATEGORIES
     /**
+     * gets the total likes for the song
+     * 
+     * @return
+     */
+    public int getLikes() {
+        int count = 0;
+        ListIterator<Response> iterator = responses.listIterator();
+        while (iterator.hasNext()) { // Iterates through the responses arrayList
+                                     // and counts the likes
+            Response current = iterator.next();
+            if (current.liked()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    /**
      * Gets how many of the responses have liked the song with a certain hobby
      * 
      * @return the number of responses that liked
-     *            of the likes being counted
+     *         of the likes being counted
      */
     public int getLikes(HobbyEnum hobby) {
         int count = 0;
@@ -205,6 +259,8 @@ public class Song {
         }
         return count;
     }
+
+
     /**
      * Gets how many of the responses have like the song in a certain region
      * 
@@ -224,62 +280,6 @@ public class Song {
             }
         }
         return count;
-    }
-    
-    
-    /**
-     * gets percent of people who liked song
-     * by the hobby
-     * @return is percent of those who liked it in each hobby
-     */
-    public int getPercentLiked(HobbyEnum hobby) {
-        return getLikes(hobby) / responses.size();
-    }
-    
-    /**
-     * gets percent of people who liked song
-     * by the major
-     * @return is percent of those who liked it in each major
-     */
-    public int getPercentLiked(MajorEnum major) {
-        return getLikes(major) / responses.size();
-    }
-    
-    /**
-     * gets percent of people who liked song
-     * by the region
-     * @return is percent of those who liked it in each region
-     */
-    public int getPercentLiked(RegionEnum region) {
-        return getLikes(region) / responses.size();
-    }
-    
-    /**
-     * gets percent of people who heard song
-     * by the region
-     * @return is percent of those who liked it in each region
-     */
-    public int getPercentHeard(RegionEnum region) {
-        return getHeards(region) / responses.size();
-    }
-    
-    /**
-     * gets percent of people who heard song
-     * by the major
-     * @return is percent of those who liked it in each major
-     */
-    public int getPercentHeard(MajorEnum major) {
-        return getHeards(major) / responses.size();
-    }
-    
-    
-    /**
-     * gets percent of people who heard song
-     * by the hobby
-     * @return is percent of those who liked it in each hobby
-     */
-    public int getPercentHeard(HobbyEnum hobby) {
-        return getHeards(hobby) / responses.size();
     }
 
 
@@ -312,7 +312,7 @@ public class Song {
      *         equal to, and less than
      */
     public int compareYear(Song s) {
-        return (year - s.getYear());
+        return Integer.compare(year, s.getYear());
     }
 
 
@@ -341,4 +341,24 @@ public class Song {
         sBuilder.append(genre);
         return sBuilder.toString();
     }
+
+
+    /**
+     * equals method primarily for testing
+     * 
+     * @return true if the titles, artists, genres, and years are the same
+     * @param other
+     *            the song object to test against
+     */
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+        Song otherSong = (Song)(other); // cast it now that we know that clases
+                                        // are the same
+        return (getTitle().equals(otherSong.getTitle()) && getArtist().equals(
+            otherSong.getArtist()) && getYear() == otherSong.getYear()
+            && getGenre().equals(otherSong.getGenre()));
+    }
+
 }
