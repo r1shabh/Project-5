@@ -360,5 +360,145 @@ public class Song {
             otherSong.getArtist()) && getYear() == otherSong.getYear()
             && getGenre().equals(otherSong.getGenre()));
     }
+    
+    /**
+     * returns the percent of people
+     * who have a certain hobby that have
+     * heard this song
+     * 
+     * @param hobby
+     *            the given hobby
+     * @return percentage who have heard this song
+     */
+    public int getPercentHeard(HobbyEnum hobby) {
+        int total = 0;
+        int totalHeard = 0;
+        for (Response r : this.responses) {
+            if (hobby.equals(r.getHobby())) {
+                total++;
+                if (r.hasHeard()) {
+                    totalHeard++;
+                }
+            }
+        }
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
+
+
+    /**
+     * returns the percentage of people who have
+     * a certain hobby like this song
+     * 
+     * @param hobby
+     *            the given hobby
+     * @return percentage who like this song
+     */
+    public int getPercentLiked(HobbyEnum hobby) {
+        int total = 0;
+        int totalLiked = 0;
+        for (Response r : this.responses) {
+            if (hobby.equals(r.getHobby())) {
+                total++;
+                if (r.liked()) {
+                    totalLiked++;
+                }
+            }
+        }
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
+    
+        /**
+     * returns the percent of people from a given region who
+     * have heard this song
+     * 
+     * @param region
+     *            desired region
+     * @return percent of people from region who have heard this song
+     */
+    public int getPercentHeard(RegionEnum region) {
+        int total = 0;
+        int totalHeard = 0;
+        for (Response r : this.responses) {
+            if (region.equals(r.getRegion())) {
+                total++;
+                if (r.hasHeard()) {
+                    totalHeard++;
+                }
+            }
+        }
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
+
+
+    /**
+     * returns the percent of people from a region who like this song
+     * 
+     * @param region
+     *            desired region
+     * @return percent of people from region who like this song
+     */
+    public int getPercentLiked(RegionEnum region) {
+        int total = 0;
+        int totalLiked = 0;
+        for (Response r : this.responses) {
+            if (region.equals(r.getRegion())) {
+                total++;
+                if (r.liked()) {
+                    totalLiked++;
+                }
+            }
+        }
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
+
+
+    /**
+     * returns the percent of people of a given major who have heard this song
+     * 
+     * @param major
+     *            the desired major
+     * @return percent of people of the major who have heard this song
+     */
+    public int getPercentHeard(MajorEnum major) {
+        int total = 0;
+        int totalHeard = 0;
+        for (Response r : this.responses) {
+            if (major.equals(r.getMajor())) {
+                total++;
+                if (r.hasHeard()) {
+                    totalHeard++;
+                }
+            }
+        }
+        double temp = (totalHeard * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
+
+
+    /**
+     * returns the percent of people of a given major who like this song
+     * 
+     * @param major
+     *            desired major
+     * @return percent of people of that major who like this song
+     */
+    public int getPercentLiked(MajorEnum major) {
+        int total = 0;
+        int totalLiked = 0;
+        for (Response r : this.responses) {
+            if (major.equals(r.getMajor())) {
+                total++;
+                if (r.liked()) {
+                    totalLiked++;
+                }
+            }
+        }
+        double temp = (totalLiked * 1000 / total * 1000) / 10000;
+        return  (int)temp;
+    }
 
 }
